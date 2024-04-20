@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
@@ -26,6 +27,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('newsletter/list', [NewsletterController::class, 'ListNews']);
     Route::post('delete/newsletter', [NewsletterController::class, 'DelNewsletter']);
 
+    Route::get('faq/list', [FaqController::class, 'FaqList']);
+    Route::post('faq', [FaqController::class, 'Faq']);
+    Route::post('delete/faq', [FaqController::class, 'Delete']);
 
 
 });
