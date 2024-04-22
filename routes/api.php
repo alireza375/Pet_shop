@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\Admin\NewsletterController;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\ProfileController;
-use App\Http\Controllers\Auth\VarifyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\VarifyController;
+use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\NewsletterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,10 @@ Route::group(['middleware' => 'checkUser'],function () {
 
     Route::get('get/profile', [ProfileController::class, 'GetProfile']);
     Route::post('update/profile', [ProfileController::class, 'UpdateProfile']);
+
+
+    // Route::get('user/details', [UserController::class, 'addOrUpdate']);
+    // Route::get('user/details{id?}', [UserController::class, 'show']);
+
 
 });

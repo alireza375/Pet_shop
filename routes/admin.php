@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\NewsletterController;
-use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Routing\Route as RoutingRoute;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\ServiceCateController;
 
 Route::group(['middleware' => 'admin'], function () {
 
@@ -20,6 +23,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('page', [PageController::class, 'updateOrcreate']);
     Route::post('delete/page', [PageController::class, 'deletePage']);
 
+    Route::get('user/list', [UserController::class, 'index']);
+    Route::get('user/details{id?}', [UserController::class, 'show']);
+
 
     Route::post('setting', [SettingController::class, 'Settings']);
     Route::get('get/setting', [SettingController::class, 'GetSetting']);
@@ -31,5 +37,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('faq', [FaqController::class, 'Faq']);
     Route::post('delete/faq', [FaqController::class, 'Delete']);
 
+    Route::get('service/list', [ServiceController::class, 'index']);
+    Route::get('service/{id?}', [ServiceController::class, 'show']);
+    Route::post('service', [ServiceController::class, 'AddorUpdate']);
+    Route::post('service/delete', [ServiceController::class, 'delete']);
+
+    Route::post('service/category', [ServiceCateController::class, 'addOrUpdate']);
+    Route::get('service/category/list', [ServiceCateController::class, 'CateList']);
+    Route::post('service/category/delete', [ServiceCateController::class, 'Delete']);
 
 });

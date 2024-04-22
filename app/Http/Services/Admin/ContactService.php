@@ -47,7 +47,7 @@ class ContactService
             $contact = Contact::find($request->_id);
             if($contact){
                 $data = [
-                    '_id' => $contact->_id,
+                    '_id' => $contact->id,
                     'firstName' => $contact->firstName,
                     'lastName' => $contact->lastName,
                     'email' => $contact->email,
@@ -60,17 +60,19 @@ class ContactService
                 ];
                 // Include reply if it exists
                 $reply = json_decode($contact->reply);
+                // return $reply;
                 if($contact->reply){
                     $data['reply'] = [
                         'emai' => $reply->email,
                         'message' => $reply->message,
                         'subject' => $reply->subject,
-                        '_id' => $reply->_id,
+                        '_id' => $contact->id,
                     ];
                 }
                 return successResponse(__('Contact Fatch SuccessFully'), $data);
             }
         }
+
         return errorResponse(__('Contact Not Fount'));
     }
 
