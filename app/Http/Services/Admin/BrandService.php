@@ -2,9 +2,9 @@
 
 namespace App\Http\Services\Admin;
 
-use App\Models\ServiceCategory;
+use App\Models\Brand;
 
-class ServiceCateService
+class BrandService
 {
     public function makeData($request){
         $data = [
@@ -17,10 +17,10 @@ class ServiceCateService
     public function store($request){
         try {
             // Create a new Category
-            $cate = ServiceCategory::create($request->all());
+            $cate = Brand::create($request->all());
             // $faq->save();
 
-            return successResponse(__('Service Category created successfully.'), $cate);
+            return successResponse(__('Brand created successfully.'), $cate);
         } catch (\Exception $e) {
             return errorResponse($e->getMessage());
         }
@@ -28,12 +28,12 @@ class ServiceCateService
     }
 
     public function update($request){
-        $category = ServiceCategory::where(['id' => $request->_id])->first();
+        $category = Brand::where(['id' => $request->_id])->first();
         if (!empty($category)) {
             $data = $this->makeData($request);
             try {
                 $category->update($data);
-                return successResponse(__('Category updated successfully'), $data);
+                return successResponse(__('Brand updated successfully'), $data);
             } catch (\Exception $e) {
                 return errorResponse($e -> getMessage());
             }

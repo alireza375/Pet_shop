@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Admin;
 
 use App\Traits\ApiValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProfileRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
-    use ApiValidationTrait;
-    /**
+    use ApiValidationTrait;    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
@@ -25,13 +24,7 @@ class ProfileRequest extends FormRequest
     {
         return [
             //
-            "name" => "required",
-            "email" => "required|email",
-            "phone" => "required",
-            "birthday" => "required",
-            "gender" => "required",
-            "image" => "required",
-            // "role" => "required",
+            'name' => 'required'
         ];
     }
 }

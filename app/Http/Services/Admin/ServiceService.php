@@ -27,10 +27,7 @@ class ServiceService
         return successResponse(__('Service fetched successfully.'), new BasePaginationResource($data));
     }
 
-    public function show($request){
-
-    }
-
+    
 
     public function Store($request){
         try {

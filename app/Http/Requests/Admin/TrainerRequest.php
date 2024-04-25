@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Admin;
 
 use App\Traits\ApiValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProfileRequest extends FormRequest
+class TrainerRequest extends FormRequest
 {
     use ApiValidationTrait;
     /**
@@ -24,14 +24,14 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            "name" => "required",
+            //\
+            "user_name" => "required",
             "email" => "required|email",
             "phone" => "required",
             "birthday" => "required",
             "gender" => "required",
             "image" => "required",
-            // "role" => "required",
+            "role" => "required",
         ];
     }
 }

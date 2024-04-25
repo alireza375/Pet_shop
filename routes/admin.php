@@ -5,13 +5,19 @@ use App\Http\Controllers\Admin\FaqController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ServiceCateController;
+use App\Http\Controllers\Admin\TrainerController;
 
 Route::group(['middleware' => 'admin'], function () {
+
+    Route::post('add/trainer', [TrainerController::class, 'AddTrainer']);
 
     Route::get('contact',[ContactController::class, 'GetContact']);
     Route::post('contact/delete',[ContactController::class, 'delete']);
@@ -45,5 +51,20 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('service/category', [ServiceCateController::class, 'addOrUpdate']);
     Route::get('service/category/list', [ServiceCateController::class, 'CateList']);
     Route::post('service/category/delete', [ServiceCateController::class, 'Delete']);
+
+
+    Route::post('brand', [BrandController::class, 'addOrUpdate']);
+    Route::get('brand/list', [BrandController::class, 'BrandList']);
+    Route::post('brand/delete', [BrandController::class, 'Delete']);
+
+
+    //product
+    Route::get('get/product', [ProductController::class, 'getproduct']);
+    Route::get('product/list', [ProductController::class, 'index']);
+    Route::post('product', [ProductController::class, 'updateOrAddproduct']);
+    Route::delete('product', [ProductController::class, 'delete']);
+
+    Route::post('review/delete', [ReviewController::class, 'delete']);
+
 
 });

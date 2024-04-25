@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\VarifyController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::post('user/contact', [ContactController::class, 'Store']);
 
 Route::post('newsletter', [NewsletterController::class, 'newsletter']);
 
+Route::get('review/list', [ReviewController::class, 'index']);
+
+
 
 Route::group(['middleware' => 'checkUser'],function () {
 
@@ -44,6 +48,9 @@ Route::group(['middleware' => 'checkUser'],function () {
 
     // Route::get('user/details', [UserController::class, 'addOrUpdate']);
     // Route::get('user/details{id?}', [UserController::class, 'show']);
+
+
+    Route::post('review', [ReviewController::class, 'addReviewUpdate']);
 
 
 });

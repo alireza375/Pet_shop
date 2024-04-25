@@ -17,10 +17,12 @@ class ProfileService
         'birthday' => $request->birthday,
         'gender' => $request->gender,
         // 'image' => $request->gender,
+        // 'role' => $request->role,
         'image' => $request->hasFile('image') ? fileUpload($request->file('image'), public_path("Auth") ) :  null,
         (public_path("About_logos"))
     ];
     // PATH_GALLERIES
+    return $data;
     }
 
     public function GetProfile(){
