@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\TrainerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::post('user/contact', [ContactController::class, 'Store']);
 Route::post('newsletter', [NewsletterController::class, 'newsletter']);
 
 Route::get('review/list', [ReviewController::class, 'index']);
+
+Route::get('trainer/list', [TrainerController::class, 'index']);
 
 
 

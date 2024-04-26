@@ -6,6 +6,7 @@ use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\BreedController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProductController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Admin\TrainerController;
 Route::group(['middleware' => 'admin'], function () {
 
     Route::post('add/trainer', [TrainerController::class, 'AddTrainer']);
+    Route::post('delete/trainer', [TrainerController::class, 'delete']);
 
     Route::get('contact',[ContactController::class, 'GetContact']);
     Route::post('contact/delete',[ContactController::class, 'delete']);
@@ -65,6 +67,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('product', [ProductController::class, 'delete']);
 
     Route::post('review/delete', [ReviewController::class, 'delete']);
+
+    Route::post('breed', [BreedController::class, 'addOrUpdate']);
+    Route::get('breed/list', [BreedController::class, 'index']);
+    Route::post('breed/delete', [BreedController::class, 'Delete']);
 
 
 });

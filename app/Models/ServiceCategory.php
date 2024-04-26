@@ -10,7 +10,8 @@ class ServiceCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'image'
     ];
 
     public function Services()

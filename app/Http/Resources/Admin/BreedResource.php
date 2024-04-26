@@ -5,7 +5,7 @@ namespace App\Http\Resources\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PageResource extends JsonResource
+class BreedResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,16 @@ class PageResource extends JsonResource
     {
         return [
             '_id'        => $this->id,
-            'title'     => $this->title,
-            'slug'      => $this->slug,
-            'content_type' => $this->content_type,
-            'content'   => json_decode($this->content),
+            'name'     => $this->name,
+            'image'      => $this->image,
+            'description' => $this->description,
+            'traits'   => json_decode($this->traits),
+            'origin' => $this->origin,
+            'year_recognized' => $this->year_recognized,
+            'specifications'   => json_decode($this->specifications),
+            'status' => $this->status,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
-
         ];
     }
 }
