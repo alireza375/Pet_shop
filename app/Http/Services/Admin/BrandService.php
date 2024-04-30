@@ -16,15 +16,14 @@ class BrandService
 
     public function store($request){
         try {
-            // Create a new Category
+            // Create a new brand
             $cate = Brand::create($request->all());
-            // $faq->save();
+            // $brand->save();
 
             return successResponse(__('Brand created successfully.'), $cate);
         } catch (\Exception $e) {
             return errorResponse($e->getMessage());
         }
-
     }
 
     public function update($request){

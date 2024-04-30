@@ -9,6 +9,7 @@ class ServiceCateService
     public function makeData($request){
         $data = [
             'name' => $request->name,
+
         ];
         return $data;
     }
@@ -17,8 +18,7 @@ class ServiceCateService
     public function store($request){
         try {
             // Create a new Category
-            $cate = ServiceCategory::create($request->all());
-            // $faq->save();
+            $cate = ServiceCategory::create($this->makeData($request));
 
             return successResponse(__('Service Category created successfully.'), $cate);
         } catch (\Exception $e) {

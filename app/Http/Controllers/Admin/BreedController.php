@@ -22,7 +22,8 @@ class BreedController extends Controller
 
     public function index(Request $request){
         $per_page = $request->per_page ?? PERPAGE_PAGINATION;
-        $data = Breed::select('id as _id', 'image', 'name','description', 'created_at as createdAt', 'updated_at as updatedAt')->paginate($per_page);
+        $data = Breed::select('id as _id', 'image', 'name','description', 'origin', 'year_recognized', 'traits', 'specifications',
+        'created_at as createdAt', 'updated_at as updatedAt')->paginate($per_page);
         return successResponse(__('Breed fetched successfully.'), new BasePaginationResource($data));
     }
 

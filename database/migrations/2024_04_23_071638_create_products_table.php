@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('sku_code');
             $table->string('price');
-            $table->string('weight');
+            // $table->string('weight');
             $table->text('images');
             $table->timestamps();
         });

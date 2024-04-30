@@ -173,6 +173,16 @@ function uploadMultipleImages($files)
 }
 
 
+function uploadMultipleImagesLocal($files)
+{
+    $images = [];
+    foreach ($files as $file) {
+        $images[] = fileUpload($file, IMAGE_PATH);
+    }
+    return $images;
+}
+
+
 // function fileUploadLocal($file, $path, $old_file = null)
 // {
 //     try {
@@ -208,9 +218,8 @@ function uploadMultipleImages($files)
 //     }
 // }
 
-function fileUpload($file, $path, $old_file = null)
- {
-     try {
+function fileUpload($file, $path, $old_file = null){
+    try {
          if (!file_exists(public_path($path))) {
             mkdir(public_path($path), 0777, true);
          }
@@ -222,26 +231,26 @@ function fileUpload($file, $path, $old_file = null)
             removeFile($path, $old_file);
          }
          # resize image
-         if (filesize($file) / 1024 > 2048) {
+        //  if (filesize($file) / 1024 > 2048) {
 
-             // enable extension=gd2
-             // $file->orientate(); //so that the photo does not rotate automatically
+        //      // enable extension=gd2
+        //      // $file->orientate(); //so that the photo does not rotate automatically
 
-             Image::make($file)->orientate()->save($destinationPath . $file_name, 60);
-             // quality = 60 low, 75 medium, 80 original
-         } else {
-             #original image upload
-             $file->move($destinationPath, $file_name);
-         }
+        //      Image::make($file)->orientate()->save($destinationPath . $file_name, 60);
+        //      // quality = 60 low, 75 medium, 80 original
+        //  } else {
+        //      #original image upload
+        //      $file->move($destinationPath, $file_name);
+        //  }
 
-         // $file->move($destinationPath, $file_name);
+         $file->move($destinationPath, $file_name);
 
          return $path . $file_name;
-     } catch (Exception $e) {
-         // dd($e);
+    } catch (Exception $e) {
+         dd($e);
          return null;
-     }
- }
+        }
+}
 
 
 function removeFile($path)

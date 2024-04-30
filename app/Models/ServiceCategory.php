@@ -19,4 +19,9 @@ class ServiceCategory extends Model
         // Indicates a one-to-many relationship.
         return $this->hasMany(Service::class);
     }
+    public function SubCate()
+    {
+        // Indicates a one-to-many relationship.
+        return $this->hasMany(Sub_Category::class);
+    }
 }

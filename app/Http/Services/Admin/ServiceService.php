@@ -23,11 +23,12 @@ class ServiceService
 
     public function index($request){
         $per_page = $request->per_page ?? PERPAGE_PAGINATION;
-        $data = Service::select('id as _id', 'title', 'short_description', 'price', 'image','category_id as category', 'address', 'created_at as createdAt', 'updated_at as updatedAt')->paginate($per_page);
+        $data = Service::select('id as _id', 'title', 'short_description', 'price', 'image',
+        'category_id as category', 'address', 'created_at as createdAt', 'updated_at as updatedAt')->paginate($per_page);
         return successResponse(__('Service fetched successfully.'), new BasePaginationResource($data));
     }
 
-    
+
 
     public function Store($request){
         try {

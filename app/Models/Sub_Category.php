@@ -5,23 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Sub_Category extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'short_description',
-        'category_id',
-        'price',
-        'image',
-
-        'address'
+        'service_categories_id',
+        'name'
     ];
 
     public function category()
     {
-        // Indicates a many-to-one relationship.
         return $this->belongsTo(ServiceCategory::class);
     }
+
+
 }

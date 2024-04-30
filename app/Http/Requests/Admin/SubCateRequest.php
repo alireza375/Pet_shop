@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use App\Traits\ApiValidationTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class SubCateRequest extends FormRequest
 {
     use ApiValidationTrait;
     /**
@@ -25,15 +25,8 @@ class ProductRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string',
-            'price' => 'required|string',
-            'brand_id' => 'required|string',
-            // 'images' => 'required',
-            'short_description' => 'required|string',
-            'description' => 'required|string',
-            'sku_code' => 'required',
-            // 'weight' => 'required'
-
+            'service_categories_id' => 'required',
+            'name' => 'required'
         ];
     }
 }

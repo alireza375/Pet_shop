@@ -13,8 +13,10 @@ class ProductService
         $data = [
             'name' => $request->get('name'),
             'price' => $request->get('price'),
-            'category_id' => $request->get('category'),
-            'images' => $request->hasFile('images') ? uploadMultipleImages($request->file('images')) : null,
+            'brand_id' => $request->get('brand_id'),
+            // 'category_id' => $request->get('category'),
+            'images' => $request->hasFile('images') ? uploadMultipleImagesLocal($request->file('images')) : null,
+            // 'images' => $request->hasFile('images') ? uploadMultipleImagesLocal($request->file('images'),"/test") : null,
             'short_description' => $request->get('short_description'),
             'description' => $request->get('description'),
             'weight' => $request->get('weight'),
@@ -38,9 +40,9 @@ class ProductService
             ->get(['id', 'name', 'price']);
 
         // Calculate total number of reviews and average rating for the product
-        // $totalReviews = $product->reviews()->count();
+        $totalReviews = $product->reviews()->count();
         // Change made here: Formatting average rating to two decimal places and casting to float
-        // $averageRating = (float) number_format($product->reviews()->avg('rating'), 2);
+        $averageRating = (float) number_format($product->reviews()->avg('rating'), 2);
         // Prepare the response data
         $responseData = [
             'product' => [
@@ -59,11 +61,11 @@ class ProductService
                 'createdAt' => $product->created_at,
                 'updatedAt' => $product->updated_at,
             ],
-            // 'reviewStats' => [
-            //     '_id' => null,
-            //     'totalReviews' => $totalReviews,
-            //     'averageRating' => $averageRating,
-            // ],
+            'reviewStats' => [
+                '_id' => null,
+                'totalReviews' => $totalReviews,
+                'averageRating' => $averageRating,
+            ],
             'relatedProducts' => $relatedProducts,
         ];
         return successResponse(__('Successfully gets product'), $responseData);
@@ -74,7 +76,7 @@ class ProductService
     public function store($request)
     {
         try {
-            $product = Product::create($request->all());
+            $product = Product::create($this->makeData($request));
             return successResponse(__('Product created Successfully'), $product);
         } catch (\Exception $e) {
             return errorResponse($e->getMessage());
@@ -93,14 +95,14 @@ class ProductService
         // Ensure $prevImages is always an array
         $prevImages = $request->has('prev_images') ? (array) $request->get('prev_images') : [];
         foreach ($prevImages as $imageUrl) {
-            $deleted = fileRemoveAWS($imageUrl);
+            $deleted = removeFile($imageUrl);
             if (!$deleted) {
                 return errorResponse(__('Failed to delete one or more images'));
             }
         }
         try {
             $product->update($data);
-            return successResponse(__('Successfully updated Product'));
+            return successResponse(__('Successfully updated Product'), $data);
         } catch (\Exception $e) {
             return errorResponse($e->getMessage());
         }

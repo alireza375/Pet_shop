@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ServiceCateController;
+use App\Http\Controllers\Admin\SubCateController;
 use App\Http\Controllers\Admin\TrainerController;
 
 Route::group(['middleware' => 'admin'], function () {
@@ -64,13 +65,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('get/product', [ProductController::class, 'getproduct']);
     Route::get('product/list', [ProductController::class, 'index']);
     Route::post('product', [ProductController::class, 'updateOrAddproduct']);
-    Route::delete('product', [ProductController::class, 'delete']);
+    Route::delete('delete/product', [ProductController::class, 'delete']);
 
     Route::post('review/delete', [ReviewController::class, 'delete']);
 
     Route::post('breed', [BreedController::class, 'addOrUpdate']);
     Route::get('breed/list', [BreedController::class, 'index']);
     Route::post('breed/delete', [BreedController::class, 'Delete']);
+
+    Route::post('sub/categories', [SubCateController::class, 'AddOrUpdate']);
+    Route::get('sub/categories/list', [SubCateController::class, 'index']);
+    Route::delete('delete/sub/categories', [SubCateController::class, 'delete']);
 
 
 });
