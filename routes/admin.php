@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
 use Illuminate\Routing\Route as RoutingRoute;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BreedController;
@@ -12,10 +13,11 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\NewsletterController;
-use App\Http\Controllers\Admin\ServiceCateController;
 use App\Http\Controllers\Admin\SubCateController;
 use App\Http\Controllers\Admin\TrainerController;
+use App\Http\Controllers\Admin\CurrencyController;
+use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\ServiceCateController;
 
 Route::group(['middleware' => 'admin'], function () {
 
@@ -77,5 +79,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('sub/categories/list', [SubCateController::class, 'index']);
     Route::delete('delete/sub/categories', [SubCateController::class, 'delete']);
 
+    Route::get('subscriotion/list', [PlanController::class, 'index']);
+    Route::get('subscription/get', [PlanController::class, 'show']);
+    Route::post('subscription', [PlanController::class, 'addOrUpdate']);
+    Route::delete('delete/subscription', [PlanController::class, 'delete']);
+
+    Route::get('currency/list', [CurrencyController::class, 'index']);
+    Route::get('currency/get', [CurrencyController::class, 'show']);
+    Route::post('currency', [CurrencyController::class, 'addOrUpdate']);
+    Route::delete('delete/currency', [CurrencyController::class, 'delete']);
 
 });
