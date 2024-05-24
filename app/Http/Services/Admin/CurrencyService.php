@@ -4,15 +4,25 @@ namespace App\Http\Services\Admin;
 
 use App\Models\Currency;
 use Illuminate\Database\Eloquent\Casts\Json;
+use App\Http\Resources\Admin\CurrencyResource;
 
 class CurrencyService
 {
     public function show($request){
+        $data = Currency::find(['id', $request->id]);
+        try{
+            if (!$data) {
+                return errorResponse(__('Currency not found.'));
+            }
+            return successResponse(__('Currency fetched successfully.'), CurrencyResource::collection( $data));
+
+        }catch (\Exception $e){
+            return errorResponse($e->getMessage());
+        }
 
     }
 
     public function store($request){
-
         $data = $request->all();
         // where(['code', $request->code])->first();
         $check = Currency::where(['code' => $data['code']])->first();
@@ -36,23 +46,21 @@ class CurrencyService
 
     public function update($request){
         $data = $request->all();
-        $currency = Currency::where(['id' => $data['id']])->first();
-        // dd($currency);
-        if($currency){
-            if($data['default'] == 1){
-                $default = Currency::where(['default' => 1])->first();
-                if($default){
-                    $default->default = 0;
-                    $default->save();
-                }
+        // dd($data);
+        if(isset($data['default']) && $data['default'] == 1){
+            $default = Currency::where(['default' => 1])->first();
+            if($default){
+                $default->default = 0;
+                $default->save();
             }
-            if(isset($data['rate'])){
-               $data['rate'] = json_decode($data['rate']);
-            }
-            $data = $currency->update($data);
-            dd($data);
-            return successResponse(__('Currency successfully updated'), $data);
         }
+        if(isset($data['rate'])){
+            $data['rate'] = json_encode($data['rate']);
+        }
+        $data = Currency::find($request->id)->update($data);
+        return successResponse(__('Currency successfully updated'), $data);
+        // dd($currency);
+
     }
 
 }

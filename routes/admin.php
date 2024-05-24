@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SubCateController;
 use App\Http\Controllers\Admin\TrainerController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ServiceCateController;
 
 Route::group(['middleware' => 'admin'], function () {
@@ -88,5 +89,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('currency/get', [CurrencyController::class, 'show']);
     Route::post('currency', [CurrencyController::class, 'addOrUpdate']);
     Route::delete('delete/currency', [CurrencyController::class, 'delete']);
+
+    Route::get('payment/method/list', [PaymentMethodController::class, 'index']);
+    Route::get('payment/method/get', [PaymentMethodController::class, 'show']);
+    Route::post('payment/method', [PaymentMethodController::class, 'addOrUpdate']);
+    Route::delete('delete/payment/method', [PaymentMethodController::class, 'delete']);
 
 });

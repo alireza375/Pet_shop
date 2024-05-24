@@ -5,7 +5,7 @@ namespace App\Http\Resources\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CurrencyResource extends JsonResource
+class PaymentMethodResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,8 @@ class CurrencyResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'code' => $this->code,
-            'symbol' => $this->symbol,
-            'placement' => $this->placement,
-            'default' => $this->default ? true : false,
-            'rate' => json_decode($this->rate),
+            'type' => $this->type,
+            'config' => json_decode($this->config),
         ];
     }
 }
